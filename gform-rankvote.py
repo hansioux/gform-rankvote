@@ -18,6 +18,8 @@ Original file is located at
 import pandas as pd
 import numpy as np
 import re
+from os import access, R_OK
+from os.path import isfile
 
 # To use import data from Google
 # google colab authentication
@@ -46,6 +48,7 @@ import matplotlib.pyplot as plt
 
 # To visualize in jupyter notebook or ipython
 import plotly.offline as pyo
+
 
 def get_credentials():
     '''
@@ -91,16 +94,37 @@ def retrieve_google_sheets():
 
     # Convert votes to int
     for col in df.columns:
-      if col != 'Email Address':
-        df[col] = df[col].astype(int)
-
-    # If e-mail is recorded, remove from the df
-    df_email = df
-    df = df.drop('Email Address', 1)
+        if col != 'Email Address':
+            df[col] = df[col].astype(int)
+        else:
+            # If e-mail is recorded, remove from the df
+            # df_email = df
+            df = df.drop('Email Address', 1)
 
     df = df.reset_index().iloc[:,1:]
 
-    # print(df)
+    return df
+
+
+def read_csv_input(fn):
+    '''
+    Get input data from a csv file
+    '''
+
+    df = pd.read_csv(fn)
+
+    df = df.iloc[:,1:] # Remove time stamp
+
+    # Convert votes to int
+    for col in df.columns:
+        if col != 'Email Address':
+            df[col] = df[col].astype(int)
+        else:
+            # If e-mail is recorded, remove from the df
+            # df_email = df
+            df = df.drop('Email Address', 1)
+
+    df = df.reset_index().iloc[:,1:]
 
     return df
 
@@ -198,8 +222,7 @@ def plot_sankey(vote_rounds):
                        showarrow= False,
                        text="Final round")
 
-    fig.show()
-    fig.write_image('tests/results/election_result.png')
+    return fig
 
 
 def org_sankey_data(election_result):
@@ -217,7 +240,9 @@ def org_sankey_data(election_result):
 
     vote_rounds['value'] = [1 for x in range(vote_rounds.shape[0])]
 
-    plot_sankey(vote_rounds)
+    fig = plot_sankey(vote_rounds)
+
+    return fig
 
 
 def pyrankvote_ballot(df):
@@ -288,8 +313,11 @@ def main():
     '''
     Start counting the results from the preferred election method.
     '''
+    # df = retrieve_google_sheets()
 
-    df = retrieve_google_sheets()
+    fn = './tests/data/sample_data.csv'
+    assert isfile(fn) and access(fn, R_OK), "File {} doesn't exist or isn't readable".format(fn)
+    df = read_csv_input(fn)
 
     election_result = instant_runoff(df)
     print("Ranked-choice Voting Results:")
@@ -301,7 +329,9 @@ def main():
     #print("PBV Results with %d spots:"%ns)
 
     print(election_result)
-    org_sankey_data(election_result)
+    fig = org_sankey_data(election_result)
+    fig.show()
+    fig.write_image('tests/results/election_result.png')
 
 
 if __name__ == "__main__":
