@@ -77,7 +77,7 @@ Official GCP service account guide: https://cloud.google.com/docs/authentication
     gc = gspread.authorize(creds)
 ```
 10. Paste the filename of the service account key to json_key variable in get_credentials():
-11. Paste the shared Google Sheets link to gc.open_by_url() in retrieve_google_sheets(), and run all.
+11. Paste the shared Google Sheets link to gc.open_by_url() in retrieve_google_sheets(), and run the follwing command.
 
 
 ## Tally Ranked Choice Voting Results
