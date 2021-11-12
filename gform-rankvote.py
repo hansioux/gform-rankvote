@@ -4,15 +4,9 @@
 """Takes in a google form ranked choice voting result via google speadsheet and
 goes through each round until one candidate has over 50% of the votes.
 
-Original script by rrosasl https://github.com/rrosasl/RankedVoting
-and his write up https://rrosasl.medium.com/ranked-choice-voting-with-google-forms-and-python-c471ea568a60
-However, that part of the code is now unused.
+Implemented with pyrankvote https://github.com/jontingvold/pyrankvote
 
-Modified by hansioux to record e-mail addresses and added a tie breaker.
-Alternate implementation with pyrankvote also added.
-https://github.com/jontingvold/pyrankvote
-
-Original file is located at
+The original colab script is located at
     https://colab.research.google.com/drive/1HXtNgpnBggwiHjiJa5JHSCjkppWG1XCx
 """
 import pandas as pd
