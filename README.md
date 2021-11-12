@@ -20,7 +20,7 @@ https://docs.google.com/forms/d/1WZLILsb0wO7Kqh4VadCq6HigoIgLTugd-6AIbMmc29c/vie
 After creating a new Google Form for your election, naming your question, and listing options/candidates,
 you must configure your question as the image below.
 
-![How to config Google Forms question for ranked choice voting](https://github.com/hansioux/gform-rankvote/blob/main/question_config.png?raw=true)
+![How to config Google Forms question for ranked choice voting](https://github.com/hansioux/gform-rankvote/blob/main/img/question_config.png)
 
 1. Select 'Multiple Choice Grid'
 2. For the column name, fill in 1, 2, to the number of total options/candidates you have in sequence
@@ -28,7 +28,7 @@ you must configure your question as the image below.
 4. Optional. you can choose to shuffle the order of options/candidates for each voter for a more fair result 
 5. Optional. you can require an response for each row if yo do not wish to allow voters to skip ranking options/candidates
 
-![How to config Google Forms settings](https://github.com/hansioux/gform-rankvote/blob/main/form_config.png?raw=true)
+![How to config Google Forms settings](https://github.com/hansioux/gform-rankvote/blob/main/img/form_config.png)
 
 These settings are optional.  
 
